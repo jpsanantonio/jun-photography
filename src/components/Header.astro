@@ -23,35 +23,28 @@ import profileImage from '../images/profile-image.png';
 
 <style>
   @layer reset {
-    :is(header, main, footer) *,
+    :is(header) *,
     body {
       margin: 0;
       padding: 0;
     }
-    :is(header, main, footer) ul[class] {
+    :is(header) ul[class] {
       list-style: none;
     }
   }
 
   @layer layout {
-    :is(header, main, footer) {
+    :is(header) {
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
     }
     header {
-      position: sticky;
-      top: 0;
-      background: #fff;
-      display: flex;
-      flex-direction: column;
-      z-index: 2;
-    }
-
-    main {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 1rem;
-      padding: 2rem 0;
-    }
+			position: sticky;
+			top: 0;
+			background: #fff;
+			display: flex;
+			flex-direction: column;
+			z-index: 2;
+		}
 
     .col {
       display: flex;
@@ -59,23 +52,10 @@ import profileImage from '../images/profile-image.png';
       gap: 1rem;
     }
 
-    footer {
-      text-align: center;
-      padding-bottom: 2rem;
-    }
-
-    .box {
-      padding: 2rem;
-      border-radius: 0.5rem;
-      border: 1px solid #ccc;
-      background: #fafafa;
-    }
-
     .limited {
       width: 90vw;
       max-width: 1200px;
-      margin: 0 auto;
-      position: relative;
+      margin: 0 5rem;
     }
 
     .bg {
@@ -88,22 +68,12 @@ import profileImage from '../images/profile-image.png';
         url("images/header-image.jpg") repeat-x 50% 100% / 650px auto;
       z-index: -1;
     }
-
-    :is(header, main) a:not(.button) {
-      color: rgb(26,115,232);
-      text-decoration: none;
-
-      &:hover {
-        color: navy;
-      }
-    }
   }
 
   @layer components {
     .info {
       display: grid;
       align-items: end;
-
       grid-template-columns: 8em 1fr;
       gap: 2rem;
       height: 12rem;
@@ -128,24 +98,55 @@ import profileImage from '../images/profile-image.png';
       padding-bottom: 0.75rem;
       opacity: 0.8;
     }
+  }
+</style>
 
-    #button-edit {
-      position: absolute;
-      right: 1.5rem;
-      bottom: 0;
-      width: 3rem;
-      height: 3rem;
-      border-radius: 50%;
-      color: #fff;
-      text-decoration: none;
-      background: rgb(26,115,232);
-      display: grid;
-      place-content: center;
-      font-size: 1.5rem;
+<style>
+  @keyframes adjust-info {
+    to {
+      grid-template-columns: 4em 1fr;
+      gap: 1rem;
+      height: 4.75rem;
+    }
+  }
+  @keyframes shrink-name {
+    to { font-size: 1.5rem; }
+  }
+  @keyframes add-shadow {
+    to { box-shadow: 0 5px 5px -3px rgba(0,0,0,.26); }
+  }
 
-      &:hover {
-        background: navy;
-      }
+  @keyframes move-and-fade-background {
+    to {
+      translate: 0% -5%;
+      scale: 0.96;
+      opacity: 0.3;
+    }
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .info {
+      animation: adjust-info linear both;
+    }
+    .info h2 {
+      animation: shrink-name linear both;
+    }
+    header {
+      animation: add-shadow linear both;
+    }
+    .bg  {
+      animation: move-and-fade-background linear both;
+    }
+
+    .info, h2, header, .bg {
+      animation-timeline: scroll();
+      animation-range: 0 150px;
+    }
+  }
+
+  @supports not (animation-timeline: scroll()) {
+    header {
+      box-shadow: 0 5px 5px -3px rgba(0,0,0,.26);
     }
   }
 </style>
