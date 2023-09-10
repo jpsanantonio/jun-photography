@@ -1,0 +1,151 @@
+---
+import { Image } from 'astro:assets';
+import profileImage from '../images/profile-image.png';
+
+---
+<header>
+  <div class="limited">
+    <div class="bg"></div>
+    <div class="info">
+      <Image src={profileImage} alt="Jun" class="avatar" />
+      <div>
+        <h2>Jun San Antonio</h2>
+        <ul class="meta">
+          <li>Photographer</li>
+          <li>Musician</li>
+          <li>Gamer</li>
+          <li>Nature Lover</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  @layer reset {
+    :is(header, main, footer) *,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    :is(header, main, footer) ul[class] {
+      list-style: none;
+    }
+  }
+
+  @layer layout {
+    :is(header, main, footer) {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      z-index: 2;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1rem;
+      padding: 2rem 0;
+    }
+
+    .col {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding-bottom: 2rem;
+    }
+
+    .box {
+      padding: 2rem;
+      border-radius: 0.5rem;
+      border: 1px solid #ccc;
+      background: #fafafa;
+    }
+
+    .limited {
+      width: 90vw;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .bg {
+      position: absolute;
+      inset: 0;
+      top: auto;
+      height: 13rem;
+      background:
+        linear-gradient(to bottom, #fff6 0%, #fff 80%),
+        url("images/header-image.jpg") repeat-x 50% 100% / 650px auto;
+      z-index: -1;
+    }
+
+    :is(header, main) a:not(.button) {
+      color: rgb(26,115,232);
+      text-decoration: none;
+
+      &:hover {
+        color: navy;
+      }
+    }
+  }
+
+  @layer components {
+    .info {
+      display: grid;
+      align-items: end;
+
+      grid-template-columns: 8em 1fr;
+      gap: 2rem;
+      height: 12rem;
+    }
+
+    .info h2 {
+      font-size: 2rem;
+    }
+
+    .avatar {
+      border-radius: 50%;
+      border: 0.3rem solid white;
+      float: left;
+      width: 100%;
+      height: auto;
+    }
+    .meta {
+      display: flex;
+      flex-direction: row;
+      gap: 0.75rem;
+      font-style: italic;
+      padding-bottom: 0.75rem;
+      opacity: 0.8;
+    }
+
+    #button-edit {
+      position: absolute;
+      right: 1.5rem;
+      bottom: 0;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      color: #fff;
+      text-decoration: none;
+      background: rgb(26,115,232);
+      display: grid;
+      place-content: center;
+      font-size: 1.5rem;
+
+      &:hover {
+        background: navy;
+      }
+    }
+  }
+</style>
